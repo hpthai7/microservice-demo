@@ -27,14 +27,14 @@ def users():
     if request.method == 'POST':
         payload = request.get_json(force=True, silent=True)
         print(f'/users: {request.method}, {payload}')
-        return process_users_post()
+        return process_users_post(payload)
 
     if request.method == 'GET':
         print(f'/users: {request.method}')
         return process_users_get()
 
 
-def process_users_post():
+def process_users_post(payload):
     user = mongo_handler.persist_user(payload)
     return jsonify(user)
 
