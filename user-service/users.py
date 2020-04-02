@@ -35,7 +35,7 @@ def users():
 @app.route('/users/<id>', methods=['GET'])
 def user(id):
     ''' Returns info about a specific user '''
-    return process_users_get(id)
+    return process_user_get(id)
 
 @app.route('/users/<username>/lists', methods=['GET'])
 def user_lists(username):
