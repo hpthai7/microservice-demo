@@ -1,5 +1,6 @@
 from src.mongo_handler import MongoHandler
 from flask import Flask, jsonify, request, make_response
+from ..utils.json_encoder import JSONEncoder
 import requests
 import os
 import simplejson as json
@@ -36,12 +37,13 @@ def users():
 
 def process_users_post(payload):
     user = mongo_handler.persist_user(payload)
-    return jsonify(user)
+    return json.encode(user, cls=JSONEncoder)
 
 def process_users_get():
     users = mongo_handler.get_users()
-    print(f'process_users_get: {users}')
-    return jsonify(users)
+    json_users = json.encode(user, cls=JSONEncoder)
+    print(f'process_users_get: {json_users}')
+    return json_users
 
 def process_request_error():
     pass
