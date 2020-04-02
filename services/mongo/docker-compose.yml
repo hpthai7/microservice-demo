@@ -1,0 +1,20 @@
+version: '3.7'
+
+services:
+
+  mongo-xp:
+    image: mongo
+    restart: always
+    labels:
+      co.elastic.logs/module: mongodb
+    volumes:
+      - 'mongo-data:/data/db'
+      - 'mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh'
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=admin!2020
+    ports:
+      - '27017:27017'
+
+volumes:
+  mongo-data:
