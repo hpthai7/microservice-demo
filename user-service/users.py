@@ -37,11 +37,11 @@ def users():
 
 def process_users_post(payload):
     user = mongo_handler.persist_user(payload)
-    return json.encode(user, cls=JSONEncoder)
+    return json.dumps(user, cls=JSONEncoder)
 
 def process_users_get():
     users = mongo_handler.get_users()
-    json_users = json.encode(user, cls=JSONEncoder)
+    json_users = json.dumps(user, cls=JSONEncoder)
     print(f'process_users_get: {json_users}')
     return json_users
 
