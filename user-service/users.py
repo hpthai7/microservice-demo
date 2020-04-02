@@ -36,8 +36,9 @@ def users():
 
 
 def process_users_post(payload):
-    user = mongo_handler.persist_user(payload)
-    return json.dumps(user, cls=JSONEncoder)
+    inserted_id = mongo_handler.persist_user(payload)
+    print(f'process_users_post: {inserted_id}')
+    return json.dumps(inserted_id, cls=JSONEncoder)
 
 def process_users_get():
     users = mongo_handler.get_users()

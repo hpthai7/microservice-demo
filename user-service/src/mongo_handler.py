@@ -17,7 +17,9 @@ class MongoHandler(object):
         return self._mongo_client[Config.DB_NAME][Config.DB_COLLECTION_USERS]
 
     def persist_user(self, user):
-        return self._user_collection().insert_one(user)
+        insert_one_result = self._user_collection().insert_one(user)
+        return insert_one_result.inserted_id
+
 
     def get_users(self):
         return list(self._user_collection().find())
