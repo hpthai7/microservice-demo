@@ -3,7 +3,7 @@ from src.mongo_handler import MongoHandler
 from flask import Flask, jsonify, request, make_response
 import requests
 import os
-import simplejson as json
+import json
 
 app = Flask(__name__)
 
