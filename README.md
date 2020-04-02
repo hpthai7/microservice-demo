@@ -27,4 +27,8 @@ mongo -u test localhost:27017
 
 # POST json to service using cUrl
 curl -d '{"name":"Thien", "username": "thien_math"}' -H "Content-Type: application/json" -X POST http://localhost:5000/users
+
+curl -d '{"talk_id":"mathematics_101", "title": "Mathematics for Beginner"}' -H "Content-Type: application/json" -X POST http://localhost:5001/talks
+
+curl -d '{"name":"Thien", "username": "thien_math"}' -H "Content-Type: application/json" -X POST http://localhost:5000/users/thien_math/talk/mathematics_101
 ```

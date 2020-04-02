@@ -7,13 +7,8 @@ import json
 
 app = Flask(__name__)
 
-database_path = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
-print(database_path)
-
-with open("{}/database/users.json".format(database_path), "r") as f:
-    usr = json.load(f)
-
 mongo_handler = MongoHandler()
+
 
 @app.route("/", methods=['GET'])
 def hello():
@@ -21,54 +16,60 @@ def hello():
 
     return "User service is up and running"
 
+
 @app.route('/users', methods=['GET', 'POST'])
 def users():
     if request.method == 'POST':
         payload = request.get_json(force=True, silent=True)
-        print(f'/users: {request.method}, {payload}')
         return process_users_post(payload)
 
     if request.method == 'GET':
-        print(f'/users: {request.method}')
         return process_users_get()
+
 
 @app.route('/users/<username>', methods=['GET'])
 def user(username):
     ''' Returns info about a specific user '''
     return process_user_get(username)
 
-@app.route('/users/<username>/lists', methods=['GET'])
-def user_lists(username):
-    ''' Get lists based on username '''
 
+@app.route('/users/<username>/talk/<talk_id>', methods=['POST'])
+def user_talk():
+    ''' Reference user to talk '''
+
+    talk = get_talk(talk_id)
+    return mongo_handler.map_user_to_talk(username, talk)
+
+
+def get_talk(talk_id):
     try:
-        req = requests.get("http://127.0.0.1:5001/lists/{}".format(username))
+        req = requests.get("http://127.0.0.1:5001/talk/{}".format(talk_id))
     except requests.exceptions.ConnectionError:
-        return "Service unavailable"
+        return "Service talk unavailable"
     return req.text
+
 
 def process_users_post(payload):
     ''' Save user into database and return user id '''
 
     inserted_id = mongo_handler.persist_user(payload)
-    print(f'process_users_post: {inserted_id}')
     return json.dumps(inserted_id, cls=JSONEncoder)
+
 
 def process_users_get():
     ''' Return all users from database '''
 
     users = mongo_handler.get_users()
     json_users = json.dumps(users, cls=JSONEncoder)
-    print(f'process_users_get: {json_users}')
     return json_users
+
 
 def process_user_get(id):
     ''' Return user from database '''
 
     user = mongo_handler.get_user(id)
-    json_user = json.dumps(user, cls=JSONEncoder)
-    print(f'process_users_get: {json_users}')
-    return json_user
+    return json.dumps(user, cls=JSONEncoder)
+
 
 if __name__ == '__main__':
     app.run(port=5000, debug=True)
