@@ -1,6 +1,6 @@
 from .config import Config
+from bson.objectid import ObjectId
 import pymongo
-
 
 class MongoHandler(object):
 
