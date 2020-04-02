@@ -6,5 +6,5 @@ admin.auth(user, passwd);
 var xpmdb = db.getSiblingDB('test');
 xpmdb.createCollection('users');
 xpmdb.createCollection('talks');
-xpmdb.createUser({user:'test', pwd:'test!2020', roles: [{role:'readWrite', db: 'test'}]});
+xpmdb.createUser({user:'test', pwd:'test@2020', roles: [{role:'readWrite', db: 'test'}]});
 EOF

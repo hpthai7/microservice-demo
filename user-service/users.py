@@ -1,4 +1,5 @@
-from flask import Flask, jsonify, make_response
+from src.mongo_handler import MongoHandler
+from flask import Flask, jsonify, request, make_response
 import requests
 import os
 import simplejson as json
@@ -11,19 +12,70 @@ print(database_path)
 with open("{}/database/users.json".format(database_path), "r") as f:
     usr = json.load(f)
 
+mongo_handler = MongoHandler()
+
 @app.route("/", methods=['GET'])
 def hello():
     ''' Greet the user '''
 
-    return "Hey! User service is up and running"
+    return "User service is up and running"
 
-@app.route('/users', methods=['GET'])
+@app.route('/users', methods=['GET', 'POST'])
 def users():
     ''' Returns the list of users '''
 
-    resp = make_response(json.dumps(usr, sort_keys=True, indent=4))
-    resp.headers['Content-Type']="application/json"
-    return resp
+    if request.method == 'POST':
+        payload = request.get_json(force=True, silent=True)
+        print(f'/users: {request.method}, {payload}')
+        return process_users_post()
+
+    if request.method == 'GET':
+        print(f'/users: {request.method}')
+        return process_users_get()
+
+
+def process_users_post():
+    user = mongo_handler.persist_user(payload)
+    return jsonify(user)
+
+def process_users_get():
+    users = mongo_handler.get_users()
+    print(f'process_users_get: {users}')
+    return jsonify(users)
+
+def process_request_error():
+    pass
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @app.route('/users/<username>', methods=['GET'])
 def user_data(username):
