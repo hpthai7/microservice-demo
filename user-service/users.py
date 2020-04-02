@@ -41,7 +41,7 @@ def process_users_post(payload):
 
 def process_users_get():
     users = mongo_handler.get_users()
-    json_users = json.dumps(user, cls=JSONEncoder)
+    json_users = json.dumps(users, cls=JSONEncoder)
     print(f'process_users_get: {json_users}')
     return json_users
 
