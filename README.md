@@ -26,5 +26,5 @@ docker-compose down database -v
 mongo -u test localhost:27017
 
 # POST json to service using cUrl
-curl -d '{"name":"Thanh"}' -H "Content-Type: application/json" -X POST http://localhost:5000/users
+curl -d '{"name":"Thien", "username": "thien_math"}' -H "Content-Type: application/json" -X POST http://localhost:5000/users
 ```

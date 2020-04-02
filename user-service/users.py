@@ -32,10 +32,10 @@ def users():
         print(f'/users: {request.method}')
         return process_users_get()
 
-@app.route('/users/<id>', methods=['GET'])
-def user(id):
+@app.route('/users/<username>', methods=['GET'])
+def user(username):
     ''' Returns info about a specific user '''
-    return process_user_get(id)
+    return process_user_get(username)
 
 @app.route('/users/<username>/lists', methods=['GET'])
 def user_lists(username):
@@ -65,10 +65,10 @@ def process_users_get():
 def process_user_get(id):
     ''' Return user from database '''
 
-    users = mongo_handler.get_user(id)
-    json_users = json.dumps(users, cls=JSONEncoder)
+    user = mongo_handler.get_user(id)
+    json_user = json.dumps(user, cls=JSONEncoder)
     print(f'process_users_get: {json_users}')
-    return json_users
+    return json_user
 
 if __name__ == '__main__':
     app.run(port=5000, debug=True)

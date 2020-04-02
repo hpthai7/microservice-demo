@@ -1,4 +1,5 @@
 from .config import Config
+from .utils.helper import Helper
 from bson.objectid import ObjectId
 import pymongo
 
@@ -17,6 +18,9 @@ class MongoHandler(object):
         return self._mongo_client[Config.DB_NAME][Config.DB_COLLECTION_USERS]
 
     def persist_user(self, user):
+        if 'username' not in user:
+            user['username'] = Helper.make_id()
+        user['_id'] = user['username']
         insert_one_result = self._user_collection().insert_one(user)
         return insert_one_result.inserted_id
 
@@ -24,5 +28,4 @@ class MongoHandler(object):
         return list(self._user_collection().find())
         
     def get_user(self, id):
-        obj = {"_id" : ObjectId(id)}
-        return list(self._user_collection().find(obj))
+        return list(self._user_collection().find(id))
