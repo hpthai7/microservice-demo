@@ -1,6 +1,6 @@
+from src.utils.json_encoder import JSONEncoder
 from src.mongo_handler import MongoHandler
 from flask import Flask, jsonify, request, make_response
-from ..utils.json_encoder import JSONEncoder
 import requests
 import os
 import simplejson as json
