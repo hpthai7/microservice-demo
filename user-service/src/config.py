@@ -3,6 +3,7 @@ import logging
 
 class Config(object):
     DB_HOST = 'localhost'
+    DB_PORT = '27017'
     DB_USERNAME = 'test'
     DB_PASSWORD = 'test@2020'
     DB_NAME = 'test'

@@ -5,7 +5,9 @@ import pymongo
 class MongoHandler(object):
 
     def __init__(self):
-        self._mongo_client = pymongo.MongoClient(Config.DB_HOST,
+        print(f"Connection to mongo: {Config}")
+        self._mongo_client = pymongo.MongoClient(host=Config.DB_HOST,
+                                                 port=Config.DB_PORT, # necessary
                                                  username=Config.DB_USERNAME,
                                                  password=Config.DB_PASSWORD,
                                                  authSource=Config.DB_NAME,
