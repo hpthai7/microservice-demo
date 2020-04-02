@@ -20,4 +20,4 @@ class MongoHandler(object):
         return self._user_collection().insert_one(user)
 
     def get_users(self):
-        return self._user_collection().find()
+        return list(self._user_collection().find())

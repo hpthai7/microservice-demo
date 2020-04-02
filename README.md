@@ -16,6 +16,12 @@
 # Troubleshooting
 
 ```bash
+# Deploy one service in multiservice docker-compose.yaml
+docker-compose up -d database
+
+# Delete service container AND remove volume
+docker-compose down database -v
+
 # Connect to dockerized Mongo from localhost needs port:
 mongo -u test localhost:27017
 
