@@ -1,0 +1,35 @@
+version: '3.7'
+
+services:
+  user-handler:
+    image: user-handler
+    depends_on:
+      - database
+    ports:
+      - "127.0.0.1::5000"
+    hostname: user-handler
+    restart: always
+
+  talk-handler:
+    image: talk-handler
+    depends_on:
+      - database
+    ports:
+      - "127.0.0.1::5001"
+    hostname: talk-handler
+    restart: always
+
+  database:
+    image: mongo
+    restart: always
+    volumes:
+      - 'mongo-data:/data/db'
+      - './mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh'
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=admin!2020
+    ports:
+      - '27017:27017'
+
+volumes:
+  mongo-data:
