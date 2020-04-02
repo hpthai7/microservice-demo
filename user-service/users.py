@@ -23,8 +23,6 @@ def hello():
 
 @app.route('/users', methods=['GET', 'POST'])
 def users():
-    ''' Returns the list of users '''
-
     if request.method == 'POST':
         payload = request.get_json(force=True, silent=True)
         print(f'/users: {request.method}, {payload}')
@@ -34,60 +32,10 @@ def users():
         print(f'/users: {request.method}')
         return process_users_get()
 
-
-def process_users_post(payload):
-    inserted_id = mongo_handler.persist_user(payload)
-    print(f'process_users_post: {inserted_id}')
-    return json.dumps(inserted_id, cls=JSONEncoder)
-
-def process_users_get():
-    users = mongo_handler.get_users()
-    json_users = json.dumps(users, cls=JSONEncoder)
-    print(f'process_users_get: {json_users}')
-    return json_users
-
-def process_request_error():
-    pass
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-@app.route('/users/<username>', methods=['GET'])
-def user_data(username):
+@app.route('/users/<id>', methods=['GET'])
+def user(id):
     ''' Returns info about a specific user '''
 
-    if username not in usr:
-        return "Not found"
-
-    return jsonify(usr[username])
 
 @app.route('/users/<username>/lists', methods=['GET'])
 def user_lists(username):
@@ -98,6 +46,29 @@ def user_lists(username):
     except requests.exceptions.ConnectionError:
         return "Service unavailable"
     return req.text
+
+def process_users_post(payload):
+    ''' Save user into database and return user id '''
+
+    inserted_id = mongo_handler.persist_user(payload)
+    print(f'process_users_post: {inserted_id}')
+    return json.dumps(inserted_id, cls=JSONEncoder)
+
+def process_users_get():
+    ''' Return all users from database '''
+
+    users = mongo_handler.get_users()
+    json_users = json.dumps(users, cls=JSONEncoder)
+    print(f'process_users_get: {json_users}')
+    return json_users
+
+def process_user_get(id):
+    ''' Return user from database '''
+
+    users = mongo_handler.get_user(id)
+    json_users = json.dumps(users, cls=JSONEncoder)
+    print(f'process_users_get: {json_users}')
+    return json_users
 
 if __name__ == '__main__':
     app.run(port=5000, debug=True)

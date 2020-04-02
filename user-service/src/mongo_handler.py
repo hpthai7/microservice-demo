@@ -20,6 +20,9 @@ class MongoHandler(object):
         insert_one_result = self._user_collection().insert_one(user)
         return insert_one_result.inserted_id
 
-
     def get_users(self):
         return list(self._user_collection().find())
+        
+    def get_user(self, id):
+        obj = {"_id" : ObjectId(id)}
+        return list(self._user_collection().find(obj))
