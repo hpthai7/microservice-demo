@@ -30,10 +30,10 @@ class MongoHandler(object):
         return list(self._user_collection().find())
 
     def get_user(self, id):
-        return self._talk_collection().find({"_id": id})
+        return list(self._talk_collection().find({"_id": id}))
 
     def map_user_to_talk(self, username, talk):
-        user = self.get_user(username)
+        user = self.get_user(username)[0]
         if 'talks' not in user:
             user['talks'] = []
 
