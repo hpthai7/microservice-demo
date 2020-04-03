@@ -35,9 +35,11 @@ class MongoHandler(object):
 
     def map_user_to_talk(self, username, talk):
         user = self.get_user(username)[0]
-        if 'talks' not in user:
-            user['talks'] = []
-        user['talks'] = user['talks'].append(talk['_id'])
-        print(f'user: {json.dumps(user)}')
-        result = self._user_collection().update_one({'_id': user['_id']}, {'$set': {'talks': user['talks']}}, {upsert: True})
+        talk_ids = []
+        if 'talks' not in user: 
+            talk_ids = [talk['_id']]
+        else:
+            talk_ids.append(talk['_id'])
+        print(f'talk_ids: {json.dumps(talk_ids)}')
+        result = self._user_collection().update_one({'_id': user['_id']}, {'$set': {'talk_ids': talk_ids}}, {upsert: True})
         return result.upserted_id
