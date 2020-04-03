@@ -11,6 +11,6 @@ COPY ./requirements.txt .
 # Install python additional packages 
 RUN pip3 install -r requirements.txt
 
-EXPOSE 5000
-CMD gunicorn -b :5000 main:talk_service
+EXPOSE 5001
+CMD gunicorn -b :5001 main:talk_service
 
