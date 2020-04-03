@@ -37,14 +37,15 @@ def user(username):
 def user_talk(username, talk_id):
     ''' Reference user to talk '''
 
-    talk = get_talk(talk_id)
+    talk_json = get_talk(talk_id)
+    talk = json.loads(talk_json)
     print(f'talk: {talk}')
-    return mongo_handler.map_user_to_talk(username, talk)
+    return mongo_handler.map_user_to_talk(username, talk))
 
 
 def get_talk(talk_id):
     try:
-        req = requests.get("http://127.0.0.1:5001/talk/{}".format(talk_id))
+        req = requests.get("http://127.0.0.1:5001/talks/{}".format(talk_id))
     except requests.exceptions.ConnectionError:
         return "Service talk unavailable"
     return req.text
