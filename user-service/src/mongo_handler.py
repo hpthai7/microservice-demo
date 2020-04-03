@@ -40,7 +40,7 @@ class MongoHandler(object):
         print(f'Current user: {json.dumps(user)}')
         print(f'New talk: {json.dumps(talk)}')
         if 'talk_ids' in user: 
-            talk_ids.append(user["talk_ids"])
+            talk_ids = talk_ids + user["talk_ids"]
         
         talk_ids.append(talk['_id'])
         result = self._user_collection().update_one({'_id': user['_id']}, {'$set': {'talk_ids': talk_ids}}, upsert=True)
