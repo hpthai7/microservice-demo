@@ -5,7 +5,7 @@ RUN mkdir -p /opt/user-service
 WORKDIR /opt/user-service
 
 # Copy source
-COPY ./user-service/* ./
+COPY ./user-service ./
 COPY ./requirements.txt .
 
 # Install python additional packages 
