@@ -9,7 +9,7 @@ COPY ./user-service/* ./
 COPY ./requirements.txt .
 
 # Install python additional packages 
-RUN pip3 install -r src/requirements.txt
+RUN pip3 install -r requirements.txt
 
 EXPOSE 5000
 CMD gunicorn -b :5000 main:user_service
