@@ -39,6 +39,7 @@ class MongoHandler(object):
         if 'talks' not in user: 
             talk_ids = [talk['_id']]
         else:
+            talk_ids.append(user["talk_ids"])
             talk_ids.append(talk['_id'])
         result = self._user_collection().update_one({'_id': user['_id']}, {'$set': {'talk_ids': talk_ids}}, upsert=True)
         return result.raw_result

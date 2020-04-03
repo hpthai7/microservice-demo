@@ -29,5 +29,5 @@ curl -d '{"name":"Thien", "username": "thien_math"}' -H "Content-Type: applicati
 
 curl -d '{"talk_id":"mathematics_101", "title": "Mathematics for Beginner"}' -H "Content-Type: application/json" -X POST http://localhost:5001/talks
 
-curl -d '{"name":"Thien", "username": "thien_math"}' -H "Content-Type: application/json" -X POST http://localhost:5000/users/thien_math/talk/mathematics_101
+curl -H "Content-Type: application/json" -X POST http://localhost:5000/users/thien_math/talk/mathematics_101
 ```
