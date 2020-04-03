@@ -12,5 +12,5 @@ COPY ./requirements.txt .
 RUN pip3 install -r requirements.txt
 
 EXPOSE 5001
-CMD gunicorn -b :5001 main:talk_service
+CMD gunicorn -b :5001 main:app
 
