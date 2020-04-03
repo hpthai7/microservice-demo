@@ -5,7 +5,7 @@ RUN mkdir -p /opt/talk-service
 WORKDIR /opt/talk-service
 
 # Copy source
-COPY ./talk-service/* .
+COPY ./talk-service/* ./
 COPY ./requirements.txt .
 
 # Install python additional packages 
