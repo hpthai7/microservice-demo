@@ -42,5 +42,7 @@ class MongoHandler(object):
         else:
             talk_ids.append(talk['_id'])
         print(f'talk_ids: {json.dumps(talk_ids)}')
-        result = self._user_collection().update_one({'_id': user['_id']}, {'$set': {'talk_ids': talk_ids}}, {upsert: True})
-        return result.upserted_id
+        result = self._user_collection().update_one({'_id': user['_id']}, {'$set': {'talk_ids': talk_ids}}, upsert=True)
+        d = result.raw_result
+        print(f'talk_ids: {json.dumps(d)}')
+        return '1234'
