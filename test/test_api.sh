@@ -18,10 +18,10 @@ printf "\n\nCreate channel mathematics_101...\n"
 curl -d '{"channel_id":"mathematics_101", "title": "Mathematics for Beginner"}' -H "Content-Type: application/json" -X POST http://localhost:5001/channels
 
 printf "\n\nGet all channels...\n"
-curl http://localhost:5000/channels
+curl http://localhost:5001/channels
 
 printf "\n\nGet channel mathematics_101...\n"
-curl http://localhost:5000/channels/mathematics_101
+curl http://localhost:5001/channels/mathematics_101
 
 printf "\n\nJoin user thien_math to channel mathematics_101...\n"
 curl -H "Content-Type: application/json" -X POST http://localhost:5000/users/thien_math/channel/mathematics_101
