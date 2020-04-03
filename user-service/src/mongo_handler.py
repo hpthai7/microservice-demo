@@ -1,8 +1,8 @@
 from .config import Config
 from .utils.helper import Helper
 from bson.objectid import ObjectId
-from pymongo.dbref import DBRef
 import pymongo
+from pymongo.dbref import DBRef
 import json
 
 
@@ -41,7 +41,7 @@ class MongoHandler(object):
         if 'talks' not in user:
             user['talks'] = []
 
-        dbref = DBRef(collection = "talks", id = talk["_id"])
-        user['talks'] = user['talks'].append(dbref)
+        # dbref = DBRef(collection = "talks", id = talk["_id"])
+        # user['talks'] = user['talks'].append(dbref)
         print(f'user: {json.dumps(user)}')
-        self.persist_user(user)
+        return self.persist_user(user)
