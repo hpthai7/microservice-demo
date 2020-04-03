@@ -37,7 +37,6 @@ class MongoHandler(object):
         user = self.get_user(username)[0]
         talk_ids = []
         print(f'talk: {json.dumps(talk)}')
-        print(f'talk_id: {talk['_id']}')
         if 'talks' not in user: 
             talk_ids = [talk['_id']]
         else:
