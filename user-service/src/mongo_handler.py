@@ -26,8 +26,8 @@ class MongoHandler(object):
         if 'username' not in user:
             user['username'] = Helper.make_id()
         user['_id'] = user['username']
-        insert_one_result = self._user_collection().update(user['_id'], user, True) # upsert
-        return insert_one_result.inserted_id
+        update_result = self._user_collection().update(user['_id'], user, True) # upsert
+        return update_result.upserted_id
 
     def get_users(self):
         return list(self._user_collection().find())
