@@ -34,10 +34,11 @@ def user(username):
 
 
 @app.route('/users/<username>/talk/<talk_id>', methods=['POST'])
-def user_talk():
+def user_talk(username, talk_id):
     ''' Reference user to talk '''
 
     talk = get_talk(talk_id)
+    print(f'talk: {talk}')
     return mongo_handler.map_user_to_talk(username, talk)
 
 

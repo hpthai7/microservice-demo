@@ -2,6 +2,8 @@ from .config import Config
 from .utils.helper import Helper
 from bson.objectid import ObjectId
 import pymongo
+import json
+
 
 class MongoHandler(object):
 
@@ -34,9 +36,11 @@ class MongoHandler(object):
 
     def map_user_to_talk(self, username, talk):
         user = self.get_user(username)[0]
+        print(f'user: {json.dumps(user)}')
         if 'talks' not in user:
             user['talks'] = []
 
         dbref = DBRef(collection = "talks", id = talk["_id"])
         user['talks'] = user['talks'].append(dbref)
+        print(f'user: {json.dumps(user)}')
         self.persist_user(user)
