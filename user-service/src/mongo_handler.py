@@ -21,14 +21,11 @@ class MongoHandler(object):
         return self._mongo_client[Config.DB_NAME][Config.DB_COLLECTION_USERS]
 
     def persist_user(self, user):
-        ''' Insert or update '''
-
         if 'username' not in user:
             user['username'] = Helper.make_id()
         user['_id'] = user['username']
-        update_result = self._user_collection().update_one({'_id': user['_id']}, user, True) # upsert
-        mycollection.update_one({'_id':mongo_id}, {"$set": post}, upsert=False)
-        return update_result.upserted_id
+        insert_one_result = self._user_collection().insert_one(user)
+        return insert_one_result.inserted_id
 
     def get_users(self):
         return list(self._user_collection().find())
@@ -38,11 +35,9 @@ class MongoHandler(object):
 
     def map_user_to_talk(self, username, talk):
         user = self.get_user(username)[0]
-        print(f'user: {json.dumps(user)}')
         if 'talks' not in user:
             user['talks'] = []
-
-        # dbref = DBRef(collection = "talks", id = talk["_id"])
-        # user['talks'] = user['talks'].append(dbref)
+        user['talks'] = user['talks'].append(talk['_id'])
         print(f'user: {json.dumps(user)}')
-        return self.persist_user(user)
+        result = self._user_collection().update_one({'_id': user['_id']}, {$set: {'talks': user['talks']}}, {upsert: True})
+        return result.upserted_id
