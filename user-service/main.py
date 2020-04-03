@@ -1,4 +1,4 @@
-from .config import Config
+from src.config import Config
 from src.utils.json_encoder import JSONEncoder
 from src.mongo_handler import MongoHandler
 from flask import Flask, jsonify, request, make_response
