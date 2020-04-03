@@ -27,4 +27,4 @@ class MongoHandler(object):
         return list(self._talk_collection().find())
         
     def get_talk(self, id):
-        return self._talk_collection().find(id)
+        return self._talk_collection().find({"_id": id})

@@ -28,9 +28,9 @@ class MongoHandler(object):
 
     def get_users(self):
         return list(self._user_collection().find())
-        
+
     def get_user(self, id):
-        return list(self._user_collection().find(id))
+        return self._talk_collection().find({"_id": id})
 
     def map_user_to_talk(self, username, talk):
         user = self.get_user(username)
