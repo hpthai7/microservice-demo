@@ -38,7 +38,7 @@ def user_talk(username, talk_id):
     ''' Reference user to talk '''
 
     talk_json = get_talk(talk_id)
-    talk = json.loads(talk_json)
+    talk = json.loads(talk_json)[0]
     print(f'talk: {talk}')
     return mongo_handler.map_user_to_talk(username, talk)
 
