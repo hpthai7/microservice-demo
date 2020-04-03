@@ -39,5 +39,5 @@ class MongoHandler(object):
             user['talks'] = []
         user['talks'] = user['talks'].append(talk['_id'])
         print(f'user: {json.dumps(user)}')
-        result = self._user_collection().update_one({'_id': user['_id']}, {$set: {'talks': user['talks']}}, {upsert: True})
+        result = self._user_collection().update_one({'_id': user['_id']}, {'$set': {'talks': user['talks']}}, {upsert: True})
         return result.upserted_id
