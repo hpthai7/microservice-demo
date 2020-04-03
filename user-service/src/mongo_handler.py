@@ -2,7 +2,7 @@ from .config import Config
 from .utils.helper import Helper
 from bson.objectid import ObjectId
 import pymongo
-from pymongo.dbref import DBRef
+from bson.dbref import DBRef
 import json
 
 
