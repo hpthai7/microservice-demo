@@ -45,4 +45,4 @@ class MongoHandler(object):
         result = self._user_collection().update_one({'_id': user['_id']}, {'$set': {'talk_ids': talk_ids}}, upsert=True)
         d = result.raw_result
         print(f'talk_ids: {json.dumps(d)}')
-        return '1234'
+        return result.raw_result
