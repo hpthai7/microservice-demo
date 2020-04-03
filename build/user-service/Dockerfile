@@ -1,14 +1,14 @@
 FROM python:3.7
 
-# Create app directory
+# Create work directory
 RUN mkdir -p /opt/user-service
 WORKDIR /opt/user-service
 
-# Bundle app source
-COPY ./src ./src
-COPY ./main.py .
+# Copy source
+COPY ./user-service/* .
+COPY ./requirements.txt .
 
-#Install python additional packages 
+# Install python additional packages 
 RUN pip3 install -r src/requirements.txt
 
 EXPOSE 5000
