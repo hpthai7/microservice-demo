@@ -14,7 +14,7 @@ class MongoHandler(object):
                                                  authMechanism=Config.DB_AUTH)
 
     def _talk_collection(self):
-        return self._mongo_client[Config.DB_NAME][Config.DB_COLLECTION_USERS]
+        return self._mongo_client[Config.DB_NAME][Config.DB_COLLECTION_TALKS]
 
     def persist_talk(self, talk):
         if 'talk_id' not in talk:

@@ -27,29 +27,26 @@ def talks():
 @app.route('/talks/<talk_id>', methods=['GET'])
 def talk(talk_id):
     ''' Returns info about a specific talk '''
-    return process_user_get(talk_id)
+    return process_get_talk(talk_id)
 
 def process_post_talk(payload):
     ''' Save talk into database and return talk id '''
 
-    inserted_id = mongo_handler.persist_user(payload)
+    inserted_id = mongo_handler.persist_talk(payload)
     print(f'process_post_talk: {inserted_id}')
     return json.dumps(inserted_id, cls=JSONEncoder)
 
 def process_get_talks():
     ''' Return all talks from database '''
 
-    talks = mongo_handler.get_users()
-    json_users = json.dumps(talks, cls=JSONEncoder)
-    print(f'process_get_talks: {json_users}')
-    return json_users
+    talks = mongo_handler.get_talks()
+    return json.dumps(talks, cls=JSONEncoder)
 
-def process_user_get(id):
+def process_get_talk(id):
     ''' Return talk from database '''
 
-    talk = mongo_handler.get_user(id)
-    json_user = json.dumps(talk, cls=JSONEncoder)
-    return json_user
+    talk = mongo_handler.get_talk(id)
+    return json.dumps(talk, cls=JSONEncoder)
 
 if __name__ == '__main__':
     app.run(port=5001, debug=True)
