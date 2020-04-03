@@ -40,7 +40,7 @@ def user_talk(username, talk_id):
     talk_json = get_talk(talk_id)
     talk = json.loads(talk_json)
     print(f'talk: {talk}')
-    return mongo_handler.map_user_to_talk(username, talk))
+    return mongo_handler.map_user_to_talk(username, talk)
 
 
 def get_talk(talk_id):
