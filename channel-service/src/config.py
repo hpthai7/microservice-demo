@@ -9,4 +9,4 @@ class Config(object):
     DB_NAME = 'test'
     DB_AUTH = 'SCRAM-SHA-256'
     DB_COLLECTION_USERS = 'users'
-    DB_COLLECTION_TALKS = 'talks'
+    DB_COLLECTION_channels = 'channels'

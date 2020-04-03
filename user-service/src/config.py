@@ -9,5 +9,5 @@ class Config(object):
     DB_NAME = 'test'
     DB_AUTH = 'SCRAM-SHA-256'
     DB_COLLECTION_USERS = 'users'
-    DB_COLLECTION_TALKS = 'talks'
-    TALK_SERVICE = 'talk-service'
+    DB_COLLECTION_channels = 'channels'
+    TALK_SERVICE = 'channel-service'

@@ -1,11 +1,11 @@
 FROM python:3.7
 
 # Create work directory
-RUN mkdir -p /opt/talk-service
-WORKDIR /opt/talk-service
+RUN mkdir -p /opt/channel-service
+WORKDIR /opt/channel-service
 
 # Copy source
-COPY ./talk-service ./
+COPY ./channel-service ./
 COPY ./requirements.txt .
 
 # Install python additional packages 

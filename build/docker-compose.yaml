@@ -12,15 +12,15 @@ services:
     hostname: user-service
     restart: always
 
-  talk-service:
-    image: talk-service
+  channel-service:
+    image: channel-service
     depends_on:
       - database
     links:
       - "database"
     ports:
       - "5001:5001"
-    hostname: talk-service
+    hostname: channel-service
     restart: always
 
   database:

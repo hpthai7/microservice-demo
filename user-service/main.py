@@ -34,21 +34,21 @@ def user(username):
     return process_user_get(username)
 
 
-@app.route('/users/<username>/talk/<talk_id>', methods=['POST'])
-def user_talk(username, talk_id):
-    ''' Reference user to talk '''
+@app.route('/users/<username>/channel/<channel_id>', methods=['POST'])
+def user_channel(username, channel_id):
+    ''' Reference user to channel '''
 
-    talk_json = get_talk(talk_id)
-    talk = json.loads(talk_json)[0]
-    response = mongo_handler.map_user_to_talk(username, talk)
+    channel_json = get_channel(channel_id)
+    channel = json.loads(channel_json)[0]
+    response = mongo_handler.map_user_to_channel(username, channel)
     return json.dumps(response)
 
 
-def get_talk(talk_id):
+def get_channel(channel_id):
     try:
-        req = requests.get(f"http://{Config.TALK_SERVICE}:5001/talks/{talk_id}")
+        req = requests.get(f"http://{Config.TALK_SERVICE}:5001/channels/{channel_id}")
     except requests.exceptions.ConnectionError:
-        return "Service talk unavailable"
+        return "Service channel unavailable"
     return req.text
 
 

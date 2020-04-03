@@ -33,16 +33,16 @@ class MongoHandler(object):
     def get_user(self, id):
         return list(self._user_collection().find({"_id": id}))
 
-    def map_user_to_talk(self, username, talk):
+    def map_user_to_channel(self, username, channel):
         user = self.get_user(username)[0]
-        talk_ids = []
+        channel_ids = []
         
         print(f'Current user: {json.dumps(user)}')
-        print(f'New talk: {json.dumps(talk)}')
-        if 'talk_ids' in user: 
-            talk_ids = talk_ids + user["talk_ids"]
+        print(f'New channel: {json.dumps(channel)}')
+        if 'channel_ids' in user: 
+            channel_ids = channel_ids + user["channel_ids"]
         
-        talk_ids.append(talk['_id'])
-        result = self._user_collection().update_one({'_id': user['_id']}, {'$set': {'talk_ids': talk_ids}}, upsert=True)
-        print(f'All talks: {json.dumps(talk_ids)}')
+        channel_ids.append(channel['_id'])
+        result = self._user_collection().update_one({'_id': user['_id']}, {'$set': {'channel_ids': channel_ids}}, upsert=True)
+        print(f'All channels: {json.dumps(channel_ids)}')
         return result.raw_result

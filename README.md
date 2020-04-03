@@ -23,19 +23,19 @@ curl http://localhost:5000/users
 # GET one user
 curl http://localhost:5000/users/thien_math
 
-# POST talks to talk-service
-curl -d '{"talk_id":"physics_101", "title": "Physics for Everyone"}' -H "Content-Type: application/json" -X POST http://localhost:5001/talks
+# POST channels to channel-service
+curl -d '{"channel_id":"physics_101", "title": "Physics for Everyone"}' -H "Content-Type: application/json" -X POST http://localhost:5001/channels
 
-curl -d '{"talk_id":"mathematics_101", "title": "Mathematics for Beginner"}' -H "Content-Type: application/json" -X POST http://localhost:5001/talks
+curl -d '{"channel_id":"mathematics_101", "title": "Mathematics for Beginner"}' -H "Content-Type: application/json" -X POST http://localhost:5001/channels
 
-# GET all talks
-curl http://localhost:5000/talks
+# GET all channels
+curl http://localhost:5000/channels
 
-# GET one talk
-curl http://localhost:5000/talks/mathematics_101
+# GET one channel
+curl http://localhost:5000/channels/mathematics_101
 
-# Assign talk mathematics_101 to user thien_math
-curl -H "Content-Type: application/json" -X POST http://localhost:5000/users/thien_math/talk/mathematics_101
+# Assign channel mathematics_101 to user thien_math
+curl -H "Content-Type: application/json" -X POST http://localhost:5000/users/thien_math/channel/mathematics_101
 ```
 
 

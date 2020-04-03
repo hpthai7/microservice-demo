@@ -13,18 +13,18 @@ class MongoHandler(object):
                                                  authSource=Config.DB_NAME,
                                                  authMechanism=Config.DB_AUTH)
 
-    def _talk_collection(self):
-        return self._mongo_client[Config.DB_NAME][Config.DB_COLLECTION_TALKS]
+    def _channel_collection(self):
+        return self._mongo_client[Config.DB_NAME][Config.DB_COLLECTION_channels]
 
-    def persist_talk(self, talk):
-        if 'talk_id' not in talk:
-            talk['talk_id'] = Helper.make_id()
-        talk['_id'] = talk['talk_id']
-        insert_one_result = self._talk_collection().insert_one(talk)
+    def persist_channel(self, channel):
+        if 'channel_id' not in channel:
+            channel['channel_id'] = Helper.make_id()
+        channel['_id'] = channel['channel_id']
+        insert_one_result = self._channel_collection().insert_one(channel)
         return insert_one_result.inserted_id
 
-    def get_talks(self):
-        return list(self._talk_collection().find())
+    def get_channels(self):
+        return list(self._channel_collection().find())
         
-    def get_talk(self, id):
-        return list(self._talk_collection().find({"_id": id}))
+    def get_channel(self, id):
+        return list(self._channel_collection().find({"_id": id}))
