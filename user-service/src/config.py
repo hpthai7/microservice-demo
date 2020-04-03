@@ -10,3 +10,4 @@ class Config(object):
     DB_AUTH = 'SCRAM-SHA-256'
     DB_COLLECTION_USERS = 'users'
     DB_COLLECTION_TALKS = 'talks'
+    TALK_SERVICE = 'talk-service'

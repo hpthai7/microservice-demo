@@ -1,3 +1,4 @@
+from .config import Config
 from src.utils.json_encoder import JSONEncoder
 from src.mongo_handler import MongoHandler
 from flask import Flask, jsonify, request, make_response
@@ -45,7 +46,7 @@ def user_talk(username, talk_id):
 
 def get_talk(talk_id):
     try:
-        req = requests.get("http://127.0.0.1:5001/talks/{}".format(talk_id))
+        req = requests.get(f"http://{Config.TALK_SERVICE}:5001/talks/{talk_id}")
     except requests.exceptions.ConnectionError:
         return "Service talk unavailable"
     return req.text
